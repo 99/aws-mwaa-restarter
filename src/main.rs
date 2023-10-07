@@ -88,7 +88,7 @@ while !envs_to_check.is_empty() {
         let mut next_check: Vec<String> = Vec::new();
 
         for env in &envs_to_check {
-            match check_update_status(&client, &env).await {
+            match check_update_status(&client, env).await {
             Ok((status, version)) => {
             if status == "UPDATING" {
                 next_check.push(env.clone());
@@ -197,7 +197,7 @@ async fn check_update_status(client: &Client, env_name: &str) -> Result<(String,
 
 async fn run_update_command(env_name: String, profile: String, region: String) -> Result<(), String> {
     let output = Command::new("aws")
-        .args(&["mwaa", "update-environment", "--name", &env_name, "--profile", &profile, "--region", &region])
+        .args(["mwaa", "update-environment", "--name", &env_name, "--profile", &profile, "--region", &region])
         .output()
         .expect("Failed to run 'update-environment' command");
 
