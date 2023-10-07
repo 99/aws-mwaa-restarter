@@ -1,0 +1,14 @@
+[package]
+name = "mwaa-restarter"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+aws-config = "0.56.1"
+aws-sdk-mwaa = "0.32.0"
+aws-types = "0.56.1"
+clap = "2.33.3"
+tokio = { version = "1", features = ["full"] }
+
+[dev-dependencies]
+clippy = "0.0.302"

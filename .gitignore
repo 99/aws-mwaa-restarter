@@ -1,0 +1,27 @@
+# Ignore compiled Rust files and executables
+/target/
+Cargo.lock
+Cargo.toml.orig
+
+# Ignore IntelliJ IDEA project files
+.idea/
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore build output
+/target/
+
+# Ignore OS and editor-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore Rust toolchain files (useful for Rustup)
+rust-toolchain
+
+# Ignore any local .env files
+.env
+
+# Ignore compiled binaries (add the names of your binary files if different)
+
+mwaa-restarter 
