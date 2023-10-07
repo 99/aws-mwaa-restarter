@@ -46,7 +46,7 @@ Run the tool with the required flags:
 cargo run -- -p [AWS_PROFILE] -r [AWS_REGION]
 ```
 
-Replace `[AWS_PROFILE]` and `[AWS_REGION]` with your desired AWS CLI profile and region respectively.
+Replace `[AWS_PROFILE]` and `[AWS_REGION]` with your desired AWS CLI profile and region, respectively.
 
 ### Running example 
 ```bash
@@ -59,11 +59,11 @@ Updating MyAirflowEnvironment2...
 MyAirflowEnvironment3
 Do you want to update this environment? (y/n) y
 Updating MyAirflowEnvironment3 ...
-
-Do you want to update this environment? (y/n) ySuccessfully initiated update command for environment MyAirflowEnvironment1
 Successfully initiated update command for environment MyAirflowEnvironment
 Successfully initiated update command for environment MyAirflowEnvironment2
 Successfully initiated update command for environment MyAirflowEnvironment3
+
+Please wait while the following environments are updating: ["MyAirflowEnvironment", "MyAirflowEnvironment2", "MyAirflowEnvironment3"]
 ```
 
 ```bash
