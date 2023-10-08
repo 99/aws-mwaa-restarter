@@ -48,7 +48,7 @@ async fn main() {
 
     let mut handles: Vec<JoinHandle<Result<(), String>>> = Vec::new();
     // let mut count = 0;
-    let update_start_times: HashMap<String, Instant> = HashMap::new();
+    let mut update_start_times: HashMap<String, Instant> = HashMap::new();
     // let mut failed_envs: Vec<String> = Vec::new();
     let mut envs_to_check: Vec<String> = Vec::new();
     
@@ -60,6 +60,7 @@ async fn main() {
                     println!("{}", env);
                     if ask_update() {
                         println!("Updating {} ...", env);
+                        update_start_times.insert(env.clone(), Instant::now());
                         let future = run_update_command(env.clone(), profile.clone(), region_str.clone());
 
                         let handle = tokio::spawn(future);
@@ -216,4 +217,3 @@ async fn run_update_command(env_name: String, profile: String, region: String) -
 
     Ok(())
 }
-
