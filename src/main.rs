@@ -2,15 +2,11 @@ use aws_sdk_mwaa::Client;
 use aws_config::from_env;
 use clap::{Arg, App};
 use aws_types::region::Region;
-use std::io::{self, Write};
 use tokio::task::JoinHandle;
 use std::process::Command;
 use std::collections::HashMap;
 use std::time::Instant;
 use tokio::time::{sleep, Duration};
-// use std::sync::Arc;
-// use tokio::sync::Mutex;
-
 
 #[tokio::main]
 async fn main() {
@@ -113,7 +109,6 @@ while !envs_to_check.is_empty() {
         eprintln!("Error checking update status for {}: {}", env, e);
     }
 }
-
         }
 
         envs_to_check = next_check;
@@ -172,15 +167,13 @@ for (env, start_time) in &update_start_times {
 
 
 fn ask_update() -> bool {
-    print!("Do you want to update this environment? (y/n) ");
-    io::stdout().flush().unwrap();  // Flush here to ensure the output appears immediately
-    let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
+    use dialoguer::{theme::ColorfulTheme, Confirm};
 
-    match input.trim() {
-        "y" | "Y" | "yes" | "Yes" | "YES" | "sure" | "yep" => true,
-        _ => false,
-    }
+    Confirm::with_theme(&ColorfulTheme::default())
+        .with_prompt("Do you want to update this environment?")
+        .default(true)
+        .interact()
+        .unwrap()
 }
 
 async fn check_update_status(client: &Client, env_name: &str) -> Result<(String, Option<String>), Box<dyn std::error::Error>> {
