@@ -105,7 +105,8 @@ while !envs_to_check.is_empty() {
             if let Some(ver) = version {
                 env_versions.insert(env.clone(), ver);
             }
-            println!("Update for {} is done! Status: {}. Took: {:.2?} minutes.", env, status, elapsed_time.as_secs() / 60);
+            println!("Update for {} is done! Status: {}. Took: {}.", env, status, format_duration(elapsed_time));
+
         }
     },
     Err(e) => {
@@ -131,7 +132,8 @@ for (env, start_time) in &update_start_times {
     let unknown_version = "Unknown".to_string();
     let version = env_versions.get(env).unwrap_or(&unknown_version);
 
-    println!("Environment: {}, Version: {}, Updated in: {:.2?} minutes.", env, version, elapsed_time.as_secs() / 60);
+    println!("Environment: {}, Version: {}, Updated in: {}.", env, version, format_duration(elapsed_time));
+
 }
     
 }
@@ -216,4 +218,10 @@ async fn run_update_command(env_name: String, profile: String, region: String) -
     }
 
     Ok(())
+}
+
+fn format_duration(duration: Duration) -> String {
+    let minutes = duration.as_secs() / 60;
+    let seconds = duration.as_secs() % 60;
+    format!("{} minutes {} seconds", minutes, seconds)
 }
